@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(PROJECT_NAME as2_node_template)
+set(PROJECT_NAME tfg_repository)
 project(${PROJECT_NAME})
 
 # Default to C++14
@@ -37,8 +37,8 @@ set(SOURCE_CPP_FILES
   src/as2_node_template.cpp
 )
 
-add_executable(${PROJECT_NAME}_node src/as2_node_template_node.cpp ${SOURCE_CPP_FILES})
-ament_target_dependencies(${PROJECT_NAME}_node ${PROJECT_DEPENDENCIES})
+add_executable(${PROJECT_NAME}_pubsub_node src/as2_node_template_node.cpp ${SOURCE_CPP_FILES})
+ament_target_dependencies(${PROJECT_NAME}_pubsub_node ${PROJECT_DEPENDENCIES})
 
 
 if(BUILD_TESTING)
@@ -54,7 +54,7 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
-  ${PROJECT_NAME}_node
+  ${PROJECT_NAME}_pubsub_node
   DESTINATION lib/${PROJECT_NAME})
     
 ament_package()
