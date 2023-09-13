@@ -11,6 +11,7 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <fstream>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -23,6 +24,8 @@ class PubSub : public as2::Node {
   void setupNode();
 
   int count_;
+  std::ofstream log_file_;
+  std::string file_name_ = "/home/pedro/Desktop/pruebas/registro.txt";
 
   using CallbackReturn =
       rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;

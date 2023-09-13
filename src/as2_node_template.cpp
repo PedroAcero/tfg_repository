@@ -7,6 +7,8 @@ PubSub::~PubSub(){};
 void PubSub::setupNode(){
   count_=0;
 
+  log_file_.open(file_name_, std::ios_base::app);
+
   //timer_ = this->create_wall_timer(std::chrono::milliseconds(500), std::bind(&PubSub::timer_callback, this));
   timer_= this->create_timer(std::chrono::milliseconds(500), [this]() { this->timer_callback(); });
 
@@ -23,10 +25,14 @@ void PubSub::timer_callback(){
   message.data = "Hello, world! " + std::to_string(count_++);
   RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
   publisher_->publish(message);
+
+  log_file_ << "Writting: '" << message.data << "'" <<std::endl;
 };
 
 void PubSub::topic_callback(const std_msgs::msg::String & msg){
   RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg.data.c_str());
+
+  log_file_ << "I wrote: '" << msg.data << "'" << std::endl;
 };
 
 
@@ -53,6 +59,7 @@ CallbackReturn PubSub::on_shutdown(
     const rclcpp_lifecycle::State& _state) {
   // Clean other resources here.
     count_=0;
+    log_file_.close();
     //~PubSub();
   return CallbackReturn::SUCCESS;
 };
