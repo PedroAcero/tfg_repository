@@ -23,6 +23,8 @@ void PubSub::timer_callback(){
   message.data = "Hello, world! " + std::to_string(count_++);
   RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
   publisher_->publish(message);
+
+  //log_file_ << "Writting: '" << message.data << "'" <<std::endl;
 };
 
 void PubSub::topic_callback(const std_msgs::msg::String & msg){
@@ -53,6 +55,7 @@ CallbackReturn PubSub::on_shutdown(
     const rclcpp_lifecycle::State& _state) {
   // Clean other resources here.
     count_=0;
+    //log_file_.close();
     //~PubSub();
   return CallbackReturn::SUCCESS;
 };
