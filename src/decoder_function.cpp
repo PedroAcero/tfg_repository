@@ -1,22 +1,43 @@
 #include "as2_node_template/as2_node_template.hpp"
 
-Decoder::Decoder() : as2::Node("read_and_publish"), file_path_decoder_("/home/pedro/Desktop/pruebas/registro.txt") {};
+Decoder::Decoder() : as2::Node("read_and_publish") {};
+
+//Decoder::Decoder() : as2::Node("read_and_publish"), file_path_decoder_("/home/pedro/Desktop/pruebas/registro.txt") {};
 
 Decoder::~Decoder(){};
 
 void Decoder::setupDecoder(){
 
-    publisher_decoder_ = this->create_publisher<std_msgs::msg::String>("topic_decoder", 10);
+    publisher_decoder_ = this->create_publisher<std_msgs::msg::String>("decoder_topic", 10);
 
-    timer_decoder_= this->create_timer(std::chrono::seconds(1), [this]() { this->callback_decoder(); }); //2 segundos es mucho?"
+    timer_decoder_= this->create_timer(std::chrono::seconds(1), [this]() { this->callback_reading(); });
+    timer_publisher_ = this->create_timer(std::chrono::milliseconds(1500), [this]() { this->callback_publisher(); });
 
 };
 
 
-void Decoder::callback_decoder(){
+void Decoder::callback_publisher() {
+    
+    RCLCPP_INFO(this->get_logger(), "A mi me llega: %s \n", file_stack_.front().c_str());
+    RCLCPP_INFO(this->get_logger(), "Me llega con un tamaño: %d, \n", static_cast<int>(file_stack_.size()));
+    file_stack_.erase(file_stack_.begin());
+
+    if (static_cast<int>(file_stack_.size()) > 1) {
+
+        std_msgs::msg::String msg;
+        msg.data = file_stack_.front();
+
+        publisher_decoder_->publish(msg);
+        file_stack_.erase(file_stack_.begin());
+    }
+
+}
+
+
+void Decoder::callback_reading(){
 
     auto current_time_ = std::chrono::steady_clock::now();
-    auto time_elapsed_ = std::chrono::duration_cast<std::chrono::milliseconds>(current_time_ - last_callback_decoder_time_);
+    auto time_elapsed_ = std::chrono::duration_cast<std::chrono::milliseconds>(current_time_ - last__decoder_time_);
 
     if(time_elapsed_ >= std::chrono::milliseconds(timeout_decoder_)){
 
@@ -27,12 +48,10 @@ void Decoder::callback_decoder(){
 
             while (std::getline(file, line)) {
 
-                auto msg = std_msgs::msg::String();
-                msg.data = line;
+                file_stack_.push_back(line); // Almacena cada línea en el vector
 
-                RCLCPP_INFO(this->get_logger(), "I publish: '%s'", msg.data.c_str());
-
-                publisher_decoder_->publish(msg);
+                RCLCPP_INFO(this->get_logger(), "Saving data: %s, \n", line.c_str());
+                RCLCPP_INFO(this->get_logger(), "Tamaño del vector: %d, \n", static_cast<int>(file_stack_.size()));
                    
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             }
@@ -53,7 +72,7 @@ void Decoder::callback_decoder(){
         }       
     }
 
-    last_callback_decoder_time_ = current_time_;
+    last__decoder_time_ = current_time_;
 
 };
 
