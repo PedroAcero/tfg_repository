@@ -58,16 +58,16 @@ class Encoder : public as2::Node {
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State&) override;
 
   private:
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_topic_;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_encoder_;
     
     rclcpp::TimerBase::SharedPtr timer_writting_;
-    void callback_1s(const std_msgs::msg::String & msg);
-    void writting_callback();
+    void callback_record_(const std_msgs::msg::String & msg);
+    void callback_writting();
 
-    std::vector<std::string> data_vector_;
+    std::vector<std::string> data_register_;
     std::string file_path_ = "/home/pedro/Desktop/pruebas/registro.txt";
-    std::chrono::steady_clock::time_point last_callback_time_;
-    int timeout_encoder_ = 5000;
+    std::chrono::steady_clock::time_point last_encoder_time_;
+    int timeout_encoder_ = 5000; //ms
 };
 
 class Decoder : public as2::Node {
@@ -88,11 +88,14 @@ class Decoder : public as2::Node {
  private:
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_decoder_;
     rclcpp::TimerBase::SharedPtr timer_decoder_;
+    rclcpp::TimerBase::SharedPtr timer_publisher_;
 
-    void callback_decoder();
+    void callback_publisher();
+    void callback_reading();
 
-    std::string file_path_decoder_;
-    std::chrono::steady_clock::time_point last_callback_decoder_time_;
+    std::vector<std::string> file_stack_; //Cambiar vector por quizas un vector o un deque
+    std::string file_path_decoder_ = "/home/pedro/Desktop/pruebas/registro.txt";
+    std::chrono::steady_clock::time_point last__decoder_time_;
     int timeout_decoder_ = 5000;
 
 };
