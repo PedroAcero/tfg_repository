@@ -1,4 +1,4 @@
-#include "as2_node_template/as2_node_template.hpp"
+#include "data_communication/pubsub.hpp"
 
 PubSub::PubSub() : as2::Node("publish_and_subscribe") {};
 
@@ -8,7 +8,7 @@ void PubSub::setupNode(){
   count_=0;
 
   //timer_ = this->create_wall_timer(std::chrono::milliseconds(500), std::bind(&PubSub::timer_callback, this));
-  timer_= this->create_timer(std::chrono::milliseconds(500), [this]() { this->timer_callback(); });
+  timer_= this->create_timer(std::chrono::milliseconds(100), [this]() { this->timer_callback(); });
 
   publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
   subscription_ = this->create_subscription<std_msgs::msg::String>(
