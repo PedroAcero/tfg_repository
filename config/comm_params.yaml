@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    file_path_decoder: "/home/pedro/Desktop/pruebas/registroNuevo.txt"
+    publisher_channel: "decoder_topic_nuevo"
+    reading_ms: 3000
+    publish_ms: 100 
+
+    file_path_encoder: "/home/pedro/Desktop/pruebas/registroNuevo.txt"
+    subscriber_channel: "topic"

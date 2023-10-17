@@ -8,17 +8,16 @@
 #include "as2_core/node.hpp"
 
 #include <chrono>
+#include <fstream>
 #include <functional>
 #include <memory>
 #include <string>
-#include <fstream>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-
 class PubSub : public as2::Node {
- public:
+public:
   PubSub();
   ~PubSub();
 
@@ -26,21 +25,19 @@ class PubSub : public as2::Node {
 
   int count_;
 
-  using CallbackReturn =
-      rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
+  using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   CallbackReturn on_configure(const rclcpp_lifecycle::State&) override;
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State&) override;
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State&) override;
 
-  private:
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
-    
-    rclcpp::TimerBase::SharedPtr timer_;
-    void timer_callback();
-    void topic_callback(const std_msgs::msg::String & msg);
+private:
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
+
+  rclcpp::TimerBase::SharedPtr timer_;
+  void timer_callback();
+  void topic_callback(const std_msgs::msg::String& msg);
 };
- 
 
 #endif  // AS2_NODE_TEMPLATE_HPP_
