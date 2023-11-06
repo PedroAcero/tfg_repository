@@ -29,7 +29,7 @@ public:
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State&) override;
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State&) override;
 
-private:
+protected:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_decoder_;
   rclcpp::TimerBase::SharedPtr timer_decoder_;
   rclcpp::TimerBase::SharedPtr timer_publisher_;

@@ -29,7 +29,7 @@ public:
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State&) override;
   CallbackReturn on_shutdown(const rclcpp_lifecycle::State&) override;
 
-private:
+protected:
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_encoder_;
 
   void callback_record(const std_msgs::msg::String& msg);
