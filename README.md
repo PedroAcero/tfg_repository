@@ -8,4 +8,4 @@ El objetivo de este estudio es comparar y mejorar la comunicación entre sistema
  ## Registro semanal 
 
  * [Semana 1](docs/Semana1.md): Fundamentos teóricos y pruebas básicas con Zenoh
- * Semana 2: Preparando el entorno de simulación con Docker
+ * [Semana 2](docs/Semana2.md): Preparando el entorno de simulación con Docker
