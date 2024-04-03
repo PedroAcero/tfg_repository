@@ -4,7 +4,7 @@ En la segunda semana de trabajo, se preparó el entorno de simulación para Zeno
 
 ***→ Objetivo:***  Simulación de dos elementos aislados que se comuniquen a través de la red local de Wifi gracias a Zenoh. Una vez finalizada la prueba, se puede extender el alcance de las próximas tareas para acercarnos a la aplicación real del proyecto, donde los elementos involucrados sean drones comunicándose con ordenadores u otros drones.    
 
-Para este propósito, se ha diseñado una imagen de Docker construida a partir de un [Dockerfile](docker/Dockerfile). Los elementos principales que se requieren en el entorno de simualción son los siguientes:  
+Para este propósito, se ha diseñado una imagen de Docker construida a partir de un [Dockerfile](../docker/Dockerfile). Los elementos principales que se requieren en el entorno de simualción son los siguientes:  
 
 * **ROS2:** Se utiliza como base una imagen preconfigurada de ROS2 ([osrf/ros:humble-desktop](https://hub.docker.com/layers/osrf/ros/humble-desktop/images/sha256-a0addcba1ebee8df15c2f229bd24c96e603b54a27ebe02590422a5047dcd01e2?context=explore))
 * **Zenoh:** Se añade el plugin de Zenoh (https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds) para tenerlo disponible en el contenedor
@@ -24,7 +24,7 @@ Una posible solución encontrada fue gracias un repositorio que también pretend
 
 Como solución final se encontró que la instalación binaria resuelve el problema con `systemd`. En la instalación por fuente que se estaba realizando previamente, el código fuente se compila en el sistema. Sin embargo, en la instalación binaria utiliza un paquete binario precompilado.  
 
-Con esto, se consiguó elaborar un [Dockerfile](docker/Dockerfile) adecuado construir la imagen de Docker necesaria en nuestra aplicación.  
+Con esto, se consiguó elaborar un [Dockerfile](../docker/Dockerfile) adecuado construir la imagen de Docker necesaria en nuestra aplicación.  
 
 <h2> Resultados </h2>  
 
@@ -52,15 +52,15 @@ Con esto se consiguen dos terminales de los dos contenedores mencionados.
 
 Con todas estas herramientas, nuestro entorno de simulación para Zenoh tendría un aspecto como la imagen de debajo. En esta imagen, las terminales de la derecha corresponden a _contenedor_zenoh1_, mientras que las terminales de la izquierda, a _contenedor_zenoh2_   
 
-(imagen).  
+![Entorno de pruebas con Zenoh](images/Entorno.png)  
 
 Se puede comprobar que los contenedores no se comunican entre sí:  
 
-(imagen).  
+![Contenedores aislados](images/sin_zenoh.png) 
 
-En cambio, cuando se lanza Zenoh en cada uno de los contenedores, se ve el proceso de _Discovery_ en cada uno de ellos, permitiendo a lo contenedores verse y comunicarse.  
+En cambio, cuando se lanza Zenoh en cada uno de los contenedores, se ve el proceso de _Discovery_ en cada uno de ellos, permitiendo a los contenedores verse y comunicarse.  
 
-(imagen).  
+![Comunicación de los contenedores a través de Zenoh](images/con_zenoh.png)  
 
 ## Próximas tareas
 
