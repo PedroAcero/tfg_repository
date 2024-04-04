@@ -25,9 +25,9 @@ RUN apt update && \
     apt-get install -y net-tools iputils-ping iproute2
 
 # Script de configuración del entorno
-COPY setup_environment.sh /setup_environment.sh
-RUN chmod +x /setup_environment.sh
+# COPY setup_environment.sh /setup_environment.sh
+# RUN chmod +x /setup_environment.sh
 
 # Configuración del entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash", "-c", "/setup_environment.sh && exec bash"]
+# ENTRYPOINT ["/entrypoint.sh"]
+# CMD ["/bin/bash", "-c", "/setup_environment.sh && exec bash"]
