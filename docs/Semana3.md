@@ -14,3 +14,4 @@ docker network create -d macvlan --subnet 10.150.0.0/17 --gateway 10.150.0.1 -o 
 
 docker run -dit --net mi_red_prueba --ip 10.150.0.11 --name cont_mac1 -p 80:80 ros_prueba:latest /bin/bash  
 
+sudo docker run -v /var/run/dbus/:/var/run/dbus/:z -it --name contenedor_wifi4 --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --net=host --privileged ros_prueba:latest /bin/bash
