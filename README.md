@@ -10,3 +10,4 @@ El objetivo de este estudio es comparar y mejorar la comunicación entre sistema
  * [Semana 1](docs/Semana1.md): Fundamentos teóricos y pruebas básicas con Zenoh
  * [Semana 2](docs/Semana2.md): Preparando el entorno de simulación con Docker
  * [Semana 3](docs/Semana3.md): Comunicación de contenedores a través de la red local
+ * [Semana 4](docs/Semana4.md): Comunicación de contenedores a través de Bluetooth
