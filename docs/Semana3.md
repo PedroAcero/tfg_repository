@@ -32,7 +32,30 @@ Con esto claro, se van a crear dos contenedores, uno en cada ordenador portátil
 
 Con esto se comrueba que efectivamente ahora **sí se consiguen** comunicar ambos ordenadores a través de _Zenoh_. También se comprueba con `ifconfig` que la dirección IP del contenedor es la misma dirección que el ordenador local. 
 
-(foto, explicación)  
+![Video test zenoh con wifi](images/zenoh_wifi.mp4)  
+
+### Ordenador 1
+
+* **Terminal 1:**  
+
+        ros2 topic pub -r 1 topic_test std_msgs/msg/String "data: 'Hello World'"
+
+* **Terminal 2:**
+
+        zenoh-bridge-ros2dds -e tcp/<IP-address>:7447  
+
+### Ordenador 2 
+
+* **Terminal 1:**
+
+        zenoh-bridge-ros2dds  
+
+* **Terminal 2:**
+
+        ros2 topic echo /topic_test
+
+Durante el desarrollo de esta prueba se puede observar en las terminales de _Zenoh_ que se realiza el proceso de Discovery del otro dispositivo.
+    
 
 > [!NOTE]
 > Configuración adicional para habilitar el multicast:
