@@ -16,7 +16,7 @@ Con esta instrucción, además de las herramientas que disponíamos en las anter
 
 Además, como se vio [la semana anterior](./Semana3.md), gracias al argumento `--net=host`, en teoría permite utilizar la pila de red del _host_, incluyendo los dispositivos de Bluetooth que utilice el ordenador local. Sin embargo, con esta configuración, el contenedor Docker **no tiene acceso** a los dispositivos de Bluetooth.  
 
-(imagen)  
+![Captura del error](images/bluetooth_docker_mal.png)  
 
 >[!Warning]  
 >A través de buscar respuestas en foros donde personas comentan errores similares a este, finalmente se entendió el error que impedía utilizar el dispositivo de Bluetooth en el contenedor del Docker. Al final de [este foro](https://www.reddit.com/r/archlinux/comments/x8vu8o/bluetoothctl_no_default_controller_available/), plantean varias respuestas, donde destacan:
@@ -39,7 +39,7 @@ Los argumentos utilizados en la creación del contenedor son los siguientes:
 
 Con esta configuración, **sí se consigue** utilizar Bluetooth en el contenedor, e incluso establecer conexión con otros dispositivos:  
 
-(Imagen)
+![Bluetooth en contenedor](images/bluetooth_docker_bien.png)
 
 Paralelamente a esto, se ha propuesto investigar el uso del software [Home Assistant](https://www.home-assistant.io/). Esta plataforma se utiliza principalmente para domotizar el hogar. Sin embargo, como exponen en [un blog](https://www.homeautomationguy.io/blog/home-assistant-tips/installing-docker-home-assistant-and-portainer-on-ubuntu-linux) y [una serie de vídeos](https://www.youtube.com/playlist?list=PL4ed4sZb-R_8dJmakzfBywx1zL9HrFEOy), también se puede utilizar para automatizar las capacidades de varios sistemas que utilicen contendores Docker.  
 
@@ -47,7 +47,7 @@ La herramienta principal que utiliza es [Docker Compose](https://docs.docker.com
 
 Una vez seguidas las instrucciones descritas en el blog y el los vídeos sobre la instalación de _Home Assistant_ y las herramientas necesarias para su uso, se consiguió la interfaz con la que manejar de manera sencilla varios contenedores, incluyendo el contenedor que incluye _Zenoh_. Esto en el futuro quizás pueda aprovecharse para iniciar de manera automática los contenedores necesarios para el uso de _Zenoh_ en los ordenadores de a bordo de los drones, y la configuración de los mismos a través de la web.  
 
-(Imagen)
+![Portainer y home assistant](images/portainer.png)
 
 # Próximas tareas
 
