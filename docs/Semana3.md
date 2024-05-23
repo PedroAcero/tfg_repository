@@ -32,7 +32,7 @@ Con esto claro, se van a crear dos contenedores, uno en cada ordenador portátil
 
 Con esto se comrueba que efectivamente ahora **sí se consiguen** comunicar ambos ordenadores a través de _Zenoh_. También se comprueba con `ifconfig` que la dirección IP del contenedor es la misma dirección que el ordenador local. 
 
-![Video test zenoh con wifi](images/zenoh_wifi.mp4)  
+![Captura del test zenoh con wifi](images/Test_zenoh-wifi.jpeg)  
 
 ### Ordenador 1
 
