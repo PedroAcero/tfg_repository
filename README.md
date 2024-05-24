@@ -11,4 +11,5 @@ El objetivo de este estudio es comparar y mejorar la comunicación entre sistema
  * [Semana 2](docs/Semana2.md): Preparando el entorno de simulación con Docker
  * [Semana 3](docs/Semana3.md): Comunicación de contenedores a través de la red local
  * [Semana 4](docs/Semana4.md): Comunicación de contenedores a través de Bluetooth
- * [Semana 5](docs/Semana5.md): Integración con diferentes tecnologías de comunicación 
+ * [Semana 5](docs/Semana5.md): Integración con diferentes tecnologías de comunicación
+ * [Semana 6](docs/Semana6.md): Integración de comunicación serial en el entorno de Zenoh 
