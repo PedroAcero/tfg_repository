@@ -34,12 +34,12 @@ include_directories(
 )
 
 set(SOURCE_CPP_FILES 
-  src/as2_node_template.cpp
+  src/pubsub.cpp
   src/encoder_function.cpp
   src/decoder_function.cpp
 )
 
-add_executable(${PROJECT_NAME}_pubsub_node src/as2_node_template_node.cpp ${SOURCE_CPP_FILES})
+add_executable(${PROJECT_NAME}_pubsub_node src/pubsub_node.cpp ${SOURCE_CPP_FILES})
 ament_target_dependencies(${PROJECT_NAME}_pubsub_node ${PROJECT_DEPENDENCIES})
 
 add_executable(${PROJECT_NAME}_encoder_node src/encoder_function_node.cpp ${SOURCE_CPP_FILES})
@@ -48,13 +48,24 @@ ament_target_dependencies(${PROJECT_NAME}_encoder_node ${PROJECT_DEPENDENCIES})
 add_executable(${PROJECT_NAME}_decoder_node src/decoder_function_node.cpp ${SOURCE_CPP_FILES})
 ament_target_dependencies(${PROJECT_NAME}_decoder_node ${PROJECT_DEPENDENCIES})
 
-
 if(BUILD_TESTING)
   find_package(ament_cmake_cppcheck REQUIRED)
   find_package(ament_cmake_clang_format REQUIRED)
   
   ament_cppcheck(src/ include/ tests/)
   ament_clang_format(src/ include/ tests/ --config ${CMAKE_CURRENT_SOURCE_DIR}/.clang-format)
+
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(${PROJECT_NAME}_tutorial_test tests/tutorial_test.cpp)
+  ament_target_dependencies(${PROJECT_NAME}_tutorial_test ${PROJECT_DEPENDENCIES})
+
+  ament_add_gtest(${PROJECT_NAME}_encoder_test tests/encoder_test.cpp src/encoder_function.cpp)
+  target_include_directories(${PROJECT_NAME}_encoder_test PUBLIC src/) 
+  ament_target_dependencies(${PROJECT_NAME}_encoder_test ${PROJECT_DEPENDENCIES})
+
+  ament_add_gtest(${PROJECT_NAME}_decoder_test tests/decoder_test.cpp src/decoder_function.cpp)
+  target_include_directories(${PROJECT_NAME}_decoder_test PUBLIC src/) 
+  ament_target_dependencies(${PROJECT_NAME}_decoder_test ${PROJECT_DEPENDENCIES})
 endif()
 
 install(DIRECTORY

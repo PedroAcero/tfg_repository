@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    file_path_encoder: "/home/pedro/Desktop/pruebas/registroNuevo.txt"
+    subscriber_channel: "topic"
