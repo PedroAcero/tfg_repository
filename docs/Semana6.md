@@ -80,7 +80,7 @@ Con todo ello, la prueba de comunicación quedaría así:
 
 Y podemos comprobar que, efectivamente se pueden comunicar dos contenedores a través de _Zenoh_.   
 
-imagen  
+![Comunicación Zenoh](images/Comunicacion_entre_contenedores.jpeg)
 
 ## Próximas tareas
 
