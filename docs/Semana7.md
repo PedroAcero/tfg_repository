@@ -2,15 +2,15 @@
 
 ***→ Objetivo:*** Medir los datos de interés durante el uso del bridge de _Zenoh_.  
 
-Se ha utilizado el [tutorial de ROS](https://ftp.udx.icscoe.jp/ros/ros_docs_mirror/en/humble/Tutorials/Topics/Topic-Statistics-Tutorial.html) para realizar unos nodos que publican (talker) y reciben (listener_with_topic_statistics):  
+Se ha utilizado el [tutorial de ROS](https://ftp.udx.icscoe.jp/ros/ros_docs_mirror/en/humble/Tutorials/Topics/Topic-Statistics-Tutorial.html) para realizar un nodo [talker](../analytics_ws/src/cpp_pubsub/src/publisher_member_function.cpp) que publica datos, y un nodo [listener](../analytics_ws/src/cpp_pubsub/src/member_function_with_topic_statistics.cpp) que los recibe.   
 
-* **_talker_** Publica una cadena de _uint8_t_ de tamaño ajustable y frecuencia ajustable. También se añade un topic, llamado `"/expected_data"`, que recoge la cantidad de datos que se publican por el topic.
+* **_talker_** Publica una cadena de _uint8_t_ de tamaño ajustable y frecuencia ajustable. También se añade un topic, llamado `/expected_data`, que recoge la cantidad de datos que se publican por el topic.  
 Parámetros configurables mediante parámetros de ROS:
   * `publish_frequency`: Frecuencia de publicación de datos, en **ms**
   * `message_size`: Tamaño del dato publicado, en **bytes**
   * `topic_name`: Nombre del topic, un **_string_**
 
-* **_listener_with_topic_statistics_** Se suscribe al topic recibido, y publica a través del topic `/statistics` algunos datos relativos al topic que se usarán para este análisis. También se añade un topic, llamado `/received_data`, que recoge la cantidad de datos que ha recibido de ese nodo.
+* **_listener_with_topic_statistics_** Se suscribe al topic recibido, y publica a través del topic `/statistics` algunos datos relativos al topic que se usarán para este análisis. También se añade un topic, llamado `/received_data`, que recoge la cantidad de datos que ha recibido de ese nodo.  
 Parámetros configurables mediante parámetros de ROS:
   * `topic_name`: Nombre del topic, un **_string_**
 
@@ -30,7 +30,7 @@ Con todo esto, y las configuraciones de estas últimas semanas, se ha realizado 
 ![Pruebas graficas](images/pruebas_graficas.png)
 
 >[!Note]  
->Se ha tomado el límite superior del tamaño de datos porque se prevé que dato de mayor peso que se va a transmitir van a ser imágenes:
+>Se ha tomado el límite superior en el tamaño de datos porque se prevé que los datos de mayor peso que se van a transmitir van a ser imágenes:
 >* **Imágenes 1080p:** 1920 x 1080 píxeles x 24 bits/píxel x 1 byte/bit = 5.93 MB
 >* **Imágenes 4k:** 3840 x 2160 píxeles x 24 bits/pixel x 1 bye/bit = 23.73 MB  
 
@@ -44,8 +44,8 @@ Los resultados se resumen en las siguientes gráficas:
 ![Gráfica 25MB](images/graficas/grafica25mb.png)
 
 Como se puede observar, existe un límite en tamaño y frecuencia de datos que se pueden enviar a través de _Zenoh_. Este fenómeno se observa mejor en las dos últimas gráficas, donde se observa una cota inferior claramente diferenciada.  
-En este caso, podemos aproximar el límite de la transmisión de datos de _Zenoh_ a **450Kbps**
+En este caso, podemos aproximar el límite de la transmisión de datos de _Zenoh_ a **3.6 Mbps**, frente a los 250Kbps teóricos de transmisión por aire las [antenas](https://ardupilot.org/copter/docs/common-sik-telemetry-radio.html).
 
 ## Próximas tareas
 
-Utilizar _Zenoh_ en algún caso real de _aerostack2_.
+Comprobar la utilidad de _Zenoh_ en algún caso real de _aerostack2_.
