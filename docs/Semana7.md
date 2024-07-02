@@ -37,14 +37,38 @@ Con todo esto, y las configuraciones de estas últimas semanas, se ha realizado 
 A continuación se han recogido los datos para realizar un **análisis estádístico de las frecuencias** de transmisión de datos. Para ello, se ha publicado información con diferentes frecuencias (o distintos periodos en este caso, 1000ms, 20ms, 10ms, 4ms, 2ms, 1ms), y se ha observado la frecuencia con la que se reciben los datos, sacando también su valor mínimo, máximo y la desviación típica de muestras tomadas cada 10 segundos.
 Los resultados se resumen en las siguientes gráficas:  
 
-![Grafica 1 byte](images/graficas/grafica1b.png)
-![Gráfica 1KB](images/graficas/grafica1kb.png)
-![Grafica 1MB](images/graficas/grafica1mb.png)
-![Gráfica 10MB](images/graficas/grafica10mb.png)
-![Gráfica 25MB](images/graficas/grafica25mb.png)
+![Grafica 1 byte](images/graficas/antena_1b.png)
+![Gráfica 1KB](images/graficas/antena_1kb.png)
+![Grafica 1MB](images/graficas/antena_1mb.png)
+![Gráfica 10MB](images/graficas/antena_10mb.png)
+![Gráfica 25MB](images/graficas/antena_25mb.png)
 
 Como se puede observar, existe un límite en tamaño y frecuencia de datos que se pueden enviar a través de _Zenoh_. Este fenómeno se observa mejor en las dos últimas gráficas, donde se observa una cota inferior claramente diferenciada.  
-En este caso, podemos aproximar el límite de la transmisión de datos de _Zenoh_ a **3.6 Mbps**, frente a los 250Kbps teóricos de transmisión por aire las [antenas](https://ardupilot.org/copter/docs/common-sik-telemetry-radio.html).
+En este caso, podemos aproximar el límite de la transmisión de datos de _Zenoh_ a **3.52 Mbps**, frente a los 250Kbps teóricos de transmisión por aire las [antenas](https://ardupilot.org/copter/docs/common-sik-telemetry-radio.html).  
+
+También se ha repetido este experimento con el wifi del departamento, se han obtenido los siguientes resultados:  
+
+**Pérdida de datos:**  
+
+| Frecuencia de transmisión // Tamaño de datos  | 1 byte | 1KB | 1MB | 10MB | 25MB |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **1 Hz** | 100.00% | 100.00% | 100.00% | 100.00% | 100.00% |
+| **50 Hz** | 100.00% | 100.00% | 100.00% | 59.40%* | 32.60%* |
+| **100 Hz** | 100.00% | 100.00% | 100.00%* | 37.90%* | 17.20%* |
+| **250 Hz** | 100.00% | 100.00% | 99.96%* | 17.28%* | 7.24%* |
+| **500 Hz** | 100.00% | 100.00% | 77.58%* | 8.52%* | 3.40%* |
+| **1.000 Hz** | 100.00%* | 99.94%* | 44.27%* | 4.22%* | 1.75%* |  
+
+**Análisis de frecuencias:**  
+
+![Grafica 1 byte](images/graficas/wifi_1b.png)
+![Gráfica 1KB](images/graficas/wifi_1kb.png)
+![Grafica 1MB](images/graficas/wifi_1mb.png)
+![Gráfica 10MB](images/graficas/wifi_10mb.png)
+![Gráfica 25MB](images/graficas/wifi_25mb.png)  
+
+Se puede observar que al usar wifi se obtienen unos datos similares a los resultados obtenidos con las antenas, aunque ligeramente menos favorables.  
+También se observa la cota del límite inferior observado en las pruebas con las antenas en el análisis de frecuencias. Tabmién se puede calcular que en las pruebas realizadas con wifi, el límite de transmisión de datos de _Zenoh_ vale **3.52 Mbps**, frente a los 867 Mbps teóricos de transmisión del [router utilizado](https://static.tp-link.com/upload/product-overview/2023/202308/20230824/Archer%20AX18(EU)1.0_Datasheet.pdf). Este valor coincide en ambos experimentos.
 
 ## Próximas tareas
 
