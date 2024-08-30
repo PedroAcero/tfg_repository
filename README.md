@@ -14,3 +14,4 @@ El objetivo de este estudio es comparar y mejorar la comunicación entre sistema
  * [Semana 5](docs/Semana5.md): Integración con diferentes tecnologías de comunicación
  * [Semana 6](docs/Semana6.md): Integración de comunicación serial en el entorno de Zenoh
  * [Semana 7](docs/Semana7.md): Análisis de resultados teóricos
+ * [Semana 8](docs/Semana8.md): Aplicación práctica. Aerostack
