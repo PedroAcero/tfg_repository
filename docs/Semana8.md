@@ -65,7 +65,9 @@ Con estos resultados se pueden agrupar los datos en la siguiente tabla, que es l
 | /drone0/self_localization/pose | 12,0736 |	10,7050 |	13,7140 |	82,82558654 | 828 |
 | /tf | 2,0165 |	0,0251 |	12,3017 |	495,8972251 | 4968 |  
 
-_Tabla 2: Valores promedios de las frecuencias esperadas._
+_Tabla 2: Valores promedios de las frecuencias esperadas._  
+
+![Pruebas Simulador](images/Simulador.png)
 
 
 ### Simulador CON ZENOH  
@@ -103,7 +105,9 @@ Estos resultados se pueden agrupar en la siguiente tabla:
 | /drone0/self_localization/pose | 12,1790 |	10,4478 |	16,5592 |	82,10883011 | 820 |
 | /tf | 2,0287 |	0,0395 |	10,7770 |	492,9154613 | 4930 |  
 
-_Tabla 4: Valores promedios del uso de Zenoh en la aplicación_
+_Tabla 4: Valores promedios del uso de Zenoh en la aplicación_  
+
+![Pruebas Simulador+Zenoh](images/SIMULADOR+ZENOH.webm)
 
 
 ### Conclusiones
