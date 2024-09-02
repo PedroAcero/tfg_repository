@@ -53,7 +53,9 @@ Así, los datos obtenidos son los siguientes:
 | /tf | 2,0283 | 0,0253 |	12,3017 |	1,9985 |	4896 |
 |  | 2,0123 |	0,0251 |	4,9502 |	1,9583 |	4968 |
 |  | 2,0130 |	0,0254 |	4,9879 |	1,9588 |	4969 |
-|  | 2,0125 |	0,0252 |	5,1987 |	1,9587 |	4968 |  
+|  | 2,0125 |	0,0252 |	5,1987 |	1,9587 |	4968 |   
+
+_Tabla 1: Cálculo de la frecuencia esperada para los topics indicados_
 
 Con estos resultados se pueden agrupar los datos en la siguiente tabla, que es la que se va a utilizar para comparar con las pruebas con _Zenoh_:  
 
@@ -61,7 +63,9 @@ Con estos resultados se pueden agrupar los datos en la siguiente tabla, que es l
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | /drone0/sensor_measurements/battery | 20,6403 |	19,7749 |	24,2787 |	48,44898588 | 485 |
 | /drone0/self_localization/pose | 12,0736 |	10,7050 |	13,7140 |	82,82558654 | 828 |
-| /tf | 2,0165 |	0,0251 |	12,3017 |	495,8972251 | 4968 |
+| /tf | 2,0165 |	0,0251 |	12,3017 |	495,8972251 | 4968 |  
+
+_Tabla 2: Valores promedios de las frecuencias esperadas._
 
 
 ### Simulador CON ZENOH  
@@ -89,6 +93,8 @@ Con la preparación explicada, se han obtenido los siguientes resultados:
 |  | 2,0289 |	0,0410 |	7,3349 |	2,2453 |	4928 |
 |  | 2,0281 |	0,0395 |	7,5423 |	2,2350 |	4931 |  
 
+_Tabla 3: Cálculo de la frecuencia usando Zenoh_
+
 Estos resultados se pueden agrupar en la siguiente tabla:  
 
 | Nombre | Periodo Medio [ms] | Periodo Mínimo [ms] | Periodo Máximo [ms] | Frecuencia [Hz] | Nº de mensajes |
@@ -97,6 +103,8 @@ Estos resultados se pueden agrupar en la siguiente tabla:
 | /drone0/self_localization/pose | 12,1790 |	10,4478 |	16,5592 |	82,10883011 | 820 |
 | /tf | 2,0287 |	0,0395 |	10,7770 |	492,9154613 | 4930 |  
 
+_Tabla 4: Valores promedios del uso de Zenoh en la aplicación_
+
 
 ### Conclusiones
 
@@ -104,10 +112,14 @@ En primer lugar, la deferencia de la **frecuencia de la comunicación** usando _
 
 | /drone0/sensor_measurements/battery | /drone0/self_localization/pose | /tf |
 | :---: | :---: | :---: |
-| 0,45 % | 0,87 % | 0,60 % | 
+| 0,45 % | 0,87 % | 0,60 % |  
+
+_Tabla 5: Diferencia entre la frecuencia esperada sin Zenoh, y la frecuencia obtenida usando Zenoh_
 
 En segundo lugar, se observa que en algunos casos sí existe una pérdida de datos en la comunicación. Aunque esta pérdida de datos sea relativamente pequeña, el resultado es sorprendente, ya que según la primera columna de las tablas de la [semana 7](Semana7.md), se esperaba que no hubiera pérdida de datos en la transmisión. Esta pérdida de datos se reduce tras un tiempo de establecimiento.  
 
 | /drone0/sensor_measurements/battery | /drone0/self_localization/pose | /tf |
 | :---: | :---: | :---: |
-| 100 % | 99,03 % | 99,23 % | 
+| 100 % | 99,03 % | 99,23 % |  
+
+_Tabla 6: Porcentaje de datos transmitidos de un sistema a otro usando Zenoh._
