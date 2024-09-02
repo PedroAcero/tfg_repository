@@ -9,11 +9,11 @@ Para estudiar el uso de _Zenoh_ en aplicaciones reales, se ha utilizado el frame
 [Aerostack2](https://aerostack2.github.io/) es un framework de software de código abierto diseñado para ayudar a los desarrolladores a crear y construir la arquitectura de control de sistemas robóticos aéreos. Este proyecto tiene gran modularidad e independencia de software, por lo que se puede utilizar parte de los paquetes del proyecto para la aplicación específica a desarrollar.  
 Para comprobar el uso de _Zenoh_ utilizaremos varias aplicaciones que tiene  disponibles en su [repositorio](https://github.com/aerostack2/aerostack2?tab=readme-ov-file), y se medirá y valorará el uso de _Zenoh_ en aplicaciones similares.  
 
-### Simulador SIN ZENOH  
+### Simulación SIN ZENOH  
 
-En esta primera prueba se ha seguido el [ejemplo básico de Gazebo](https://aerostack2.github.io/_02_examples/gazebo/index.html). Una vez seguidos los pasos del tutorial, se puede ver una simulación con un dron que es capaz de ejecutar una misión sencilla, que consiste en: despegar, trayectoria de 4 puntos, y aterrizar.  
+En esta primera prueba se ha seguido el [ejemplo básico de Gazebo](https://aerostack2.github.io/_02_examples/gazebo/index.html). Una vez seguidos los pasos del tutorial, se puede ver una simulación con un dron que es capaz de ejecutar una misión sencilla, que consiste en: despegar, seguir una trayectoria de 4 puntos, y aterrizar.  
 
-En este primer ejemplo se ha medido algunos datos de interés que se utilizarán para comparar el mismo ejemplo usando _Zenoh_.  
+En este primer ejemplo se han medido algunos datos de interés que se utilizarán para comparar el mismo ejemplo usando _Zenoh_.  
 Lo primero que se ha realizado ha sido modificar el [nodo de analytics_ws](../analytics_ws/src/cpp_pubsub/src/member_function_with_topic_statistics.cpp) con el que se obtenían estadísticas de otros topics. En este nuevo nodo se pueden obtener estadísticas de otros topics que no sean de tipo _String_, así como recibir el nombre del topic a través de un argumento de ROS.  
 
 Con esta preparación, se han seleccionado los siguientes topics para realizar el estudio:  
@@ -70,11 +70,11 @@ _Tabla 2: Valores promedios de las frecuencias esperadas._
 ![Pruebas Simulador](images/Simulador.png)
 
 
-### Simulador CON ZENOH  
+### Simulación CON ZENOH  
 
-Para estudiar el uso de _Zenoh_ se ha repetido el mismo entorno simulado que la prueba anterior, y se ha añadido un contenedor Docker con _Zenoh_ y el nodo de las estadísticas preparado.  
+Para estudiar el uso de _Zenoh_ se ha repetido el mismo entorno simulado de la prueba anterior, y se ha añadido un contenedor Docker con _Zenoh_ y el nodo de las estadísticas preparado.  
 
-La comunicación entre el entorno de simulación (que simula un dron real) y el contenedor Docker (que simula un ordenador de control diferente) se ha realizado entre dos antenas, de manera similar al proceso seguido en la [semana 6](Semana6.md). Además, se ha actualizado el nodo del que se obtienen las estadísticas, y se ha añadido un archivo de configuración de _Zenoh_ para filtrar los topics.    
+La comunicación entre el entorno de simulación (que simula un dron real) y el contenedor Docker (que simula un ordenador de control diferente) se ha realizado a través de dos antenas, de manera similar al proceso seguido en la [semana 6](Semana6.md). Además, se ha actualizado el nodo del que se obtienen las estadísticas, y se ha añadido un archivo de configuración de _Zenoh_ para filtrar los topics.    
 
 Con esta preparación, se pretende que el ordenador local emita información del dron durante la misión en la simulación, y ver qué datos se reciben en el entorno dockerizado, así como estudiar la calidad de esta comunicación.  
 
@@ -112,7 +112,7 @@ _Tabla 4: Valores promedios del uso de Zenoh en la aplicación_
 
 ### Conclusiones
 
-En primer lugar, la deferencia de la **frecuencia de la comunicación** usando _Zenoh_ es muy similar a la que se obtiene si no se usa. Para todos los casos, se obtiene una diferencia < 1%.  
+En primer lugar, la deferencia de la **frecuencia de la comunicación** usando _Zenoh_ es muy similar a la que se obtiene si no se usa este software. Para todos los casos, se obtiene una diferencia menor al 1% con respecto a la frecuencia real del topic.  
 
 | /drone0/sensor_measurements/battery | /drone0/self_localization/pose | /tf |
 | :---: | :---: | :---: |
